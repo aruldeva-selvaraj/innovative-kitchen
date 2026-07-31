@@ -4,13 +4,14 @@ import { CartService } from '../../services/cart.service';
 import { WishlistService } from '../../services/wishlist.service';
 import { MegaMenuComponent } from './mega-menu.component';
 import { MiniCartComponent } from './mini-cart.component';
+import { BrandMarqueeComponent } from './brand-marquee.component';
 import { CategoryService } from '../../../features/catalog/data-access/category.service';
 import { Category } from '../../../features/catalog/data-access/category.model';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, MegaMenuComponent, MiniCartComponent],
+  imports: [RouterLink, MegaMenuComponent, MiniCartComponent, BrandMarqueeComponent],
   template: `
     <header class="sticky top-0 z-50 bg-white shadow-sm">
       <div class="container mx-auto px-4">
@@ -102,6 +103,9 @@ import { Category } from '../../../features/catalog/data-access/category.model';
         </div>
 
       </div>
+
+      <!-- Brand marquee strip — full width below the main header box -->
+      <app-brand-marquee />
 
       <!-- ── Mobile / Tablet drawer ── -->
       @if (menuOpen()) {
