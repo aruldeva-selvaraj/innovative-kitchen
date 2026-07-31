@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Prevent horizontal overflow on any viewport */
+  html, body {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Prevent iOS from zooming into inputs (font-size < 16px triggers zoom) */
+  input, select, textarea {
+    font-size: 16px;
+  }
+
+  /* Remove blue tap flash on mobile */
+  a, button, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Prevent text selection on button double-tap */
+  button {
+    user-select: none;
+  }
+}
+
+@layer components {
+  /* Hide scrollbar while keeping scroll functionality (carousels etc.) */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+  /* Bottom sheet slide-up animation */
+  .slide-up {
+    animation: slideUp 0.22s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(40px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { homeResource, HomeData } from './data-access/home.resource';
 import { ProductCarouselComponent } from '../../shared/ui/product-carousel/product-carousel.component';
@@ -113,9 +113,11 @@ export class HomeComponent implements OnInit {
     { slug: 'coffee-shop', label: 'Coffee Shop', image: '/assets/segments/coffee-shop.jpg' },
   ];
 
-  private readonly load = inject({ from: () => homeResource() } as any);
+  // homeResource() uses inject() internally; calling it as a field initializer
+  // keeps it within the Angular injection context.
+  private readonly home$ = homeResource();
 
   ngOnInit() {
-    homeResource().subscribe(data => this.data.set(data));
+    this.home$.subscribe(data => this.data.set(data));
   }
 }

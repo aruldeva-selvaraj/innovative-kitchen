@@ -34,7 +34,7 @@ import { ApiService } from '../../core/http/api.service';
         </div>
       } @else {
         <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
               <input type="text" formControlName="name"

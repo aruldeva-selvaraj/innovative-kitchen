@@ -15,7 +15,7 @@ import { ProductCarouselComponent } from '../../../shared/ui/product-carousel/pr
   template: `
     @if (loading()) {
       <div class="container mx-auto px-4 py-8">
-        <div class="grid grid-cols-2 gap-8 animate-pulse">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-pulse">
           <div class="h-96 bg-gray-100 rounded-xl"></div>
           <div class="space-y-4">
             <div class="h-6 bg-gray-100 rounded w-3/4"></div>
@@ -115,7 +115,7 @@ import { ProductCarouselComponent } from '../../../shared/ui/product-carousel/pr
             @if (product()!.specs && objectKeys(product()!.specs!).length) {
               <div class="border rounded-xl p-4 mt-4">
                 <h3 class="font-semibold mb-3">Specifications</h3>
-                <dl class="grid grid-cols-2 gap-2 text-sm">
+                <dl class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                   @for (key of objectKeys(product()!.specs!); track key) {
                     <dt class="text-gray-500">{{ key }}</dt>
                     <dd class="font-medium">{{ product()!.specs![key] }}</dd>

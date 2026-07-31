@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { ShellComponent } from './core/layout/shell.component';
-import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -28,16 +27,16 @@ export const routes: Routes = [
         loadChildren: () => import('./features/cart/cart.routes').then(m => m.CART_ROUTES),
       },
       {
+        path: 'checkout',
+        loadChildren: () => import('./features/checkout/checkout.routes').then(m => m.CHECKOUT_ROUTES),
+      },
+      {
         path: 'wishlist',
         loadChildren: () => import('./features/wishlist/wishlist.routes').then(m => m.WISHLIST_ROUTES),
       },
       {
         path: 'compare',
         loadChildren: () => import('./features/compare/compare.routes').then(m => m.COMPARE_ROUTES),
-      },
-      {
-        path: 'account',
-        loadChildren: () => import('./features/account/account.routes').then(m => m.ACCOUNT_ROUTES),
       },
       {
         path: 'search',

@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8000/api',
-  whatsappNumber: '971500000000',
+  whatsappNumber: '971529903885',
 };

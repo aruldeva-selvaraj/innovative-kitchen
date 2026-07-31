@@ -25,7 +25,8 @@ import { PriceComponent } from '../price/price.component';
 
       <!-- Wishlist -->
       <button
-        class="absolute top-2 right-2 z-10 p-1.5 bg-white rounded-full shadow opacity-0 group-hover:opacity-100 transition-opacity"
+        class="absolute top-2 right-2 z-10 p-1.5 bg-white rounded-full shadow
+               opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
         (click)="toggleWishlist()"
       >
         <span class="material-icons text-sm" [class.text-red-500]="isWishlisted()">
@@ -38,7 +39,7 @@ import { PriceComponent } from '../price/price.component';
         <img
           [src]="product().thumbnail"
           [alt]="product().name"
-          class="w-full h-48 object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+          class="w-full h-36 xs:h-40 sm:h-44 md:h-48 object-contain p-3 group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </a>
@@ -56,19 +57,24 @@ import { PriceComponent } from '../price/price.component';
         </div>
 
         <!-- Actions -->
-        <div class="mt-3 flex gap-2">
+        <div class="mt-3 flex flex-col gap-2">
+          <div class="flex gap-2">
+            <button
+              class="flex-1 bg-primary text-white text-sm py-2 rounded-lg hover:bg-primary-dark transition-colors font-medium"
+              (click)="addToCart()"
+            >
+              Add to Cart
+            </button>
+          </div>
           <button
-            class="flex-1 bg-primary text-white text-sm py-2 rounded-lg hover:bg-primary-dark transition-colors"
-            (click)="addToCart()"
-          >
-            Add to Cart
-          </button>
-          <button
-            class="p-2 border rounded-lg hover:bg-green-50 text-green-600"
+            class="flex items-center justify-center gap-1.5 w-full border border-green-500 text-green-600 text-sm py-2 rounded-lg hover:bg-green-50 transition-colors font-medium"
             (click)="openWhatsapp()"
-            title="Enquire on WhatsApp"
           >
-            <span class="material-icons text-sm">chat</span>
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.524 5.847L.058 23.5l5.788-1.517A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" fill-rule="evenodd" clip-rule="evenodd"/>
+            </svg>
+            Enquire on WhatsApp
           </button>
         </div>
       </div>
@@ -122,7 +128,11 @@ export class ProductCardComponent {
 
   openWhatsapp() {
     const p = this.product();
-    const url = this.whatsapp.buildProductLink(p.name, `${window.location.origin}/shop/product/${p.slug}`);
+    const url = this.whatsapp.buildProductLink(
+      p.name,
+      `${window.location.origin}/shop/product/${p.slug}`,
+      p.sku
+    );
     this.whatsapp.openChat(url);
   }
 }
