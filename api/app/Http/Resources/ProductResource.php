@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class ProductResource extends JsonResource
 {
@@ -14,8 +15,8 @@ class ProductResource extends JsonResource
             'name'              => $this->name,
             'slug'              => $this->slug,
             'sku'               => $this->sku,
-            'thumbnail'         => $this->thumbnail,
-            'images'            => $this->images ?? [],
+            'thumbnail'         => $this->resolveUrl($this->thumbnail),
+            'images'            => collect($this->images ?? [])->map(fn ($img) => $this->resolveUrl($img))->toArray(),
             'price'             => (float) $this->price,
             'original_price'    => $this->original_price ? (float) $this->original_price : null,
             'short_description' => $this->short_description,
@@ -40,5 +41,11 @@ class ProductResource extends JsonResource
             ]),
             'created_at' => $this->created_at?->toISOString(),
         ];
+    }
+
+    private function resolveUrl(?string $path): ?string
+    {
+        if (! $path) return null;
+        return str_starts_with($path, 'http') ? $path : Storage::url($path);
     }
 }

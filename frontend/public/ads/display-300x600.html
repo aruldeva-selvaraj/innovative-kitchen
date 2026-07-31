@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="ad.size" content="width=300,height=600">
+<!-- ═══════════════════════════════════════════════
+     INNOVATIVE KITCHEN — 300×600 Half Page
+     High-impact premium ad unit
+     UPDATE CONTACT: change wa-link & phone below
+     ═══════════════════════════════════════════════ -->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:300px; height:600px; overflow:hidden; font-family:'Segoe UI',Arial,sans-serif; }
+
+  .ad {
+    width:300px; height:600px; cursor:pointer; overflow:hidden; position:relative;
+    background:#0d0d1a;
+  }
+
+  /* Gradient bg layers */
+  .bg1 {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at 80% 20%, rgba(230,57,70,0.12) 0%, transparent 60%),
+               radial-gradient(ellipse at 20% 80%, rgba(15,52,96,0.4) 0%, transparent 60%),
+               linear-gradient(180deg,#0d0d1a 0%,#111827 100%);
+  }
+
+  /* Animated top bar */
+  .top-bar {
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg,#E63946,#ff6b7a,#E63946);
+    background-size:200%;
+    animation:shimmer 2s linear infinite;
+  }
+  @keyframes shimmer { 0%{background-position:200%} 100%{background-position:-200%} }
+
+  /* Floating orbs */
+  .orb1 {
+    position:absolute; width:200px; height:200px; border-radius:50%;
+    background:radial-gradient(circle, rgba(230,57,70,0.08), transparent);
+    top:-50px; right:-50px; animation:orbFloat 4s ease-in-out infinite alternate;
+  }
+  .orb2 {
+    position:absolute; width:160px; height:160px; border-radius:50%;
+    background:radial-gradient(circle, rgba(37,211,102,0.06), transparent);
+    bottom:80px; left:-40px; animation:orbFloat 5s 1s ease-in-out infinite alternate;
+  }
+  @keyframes orbFloat { from{transform:translateY(0)} to{transform:translateY(-20px)} }
+
+  /* Logo area */
+  .logo-area {
+    position:absolute; top:24px; left:20px; right:20px;
+    animation: fadeDown 0.5s ease;
+  }
+  .logo-dot-row { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+  .logo-dot { width:6px; height:6px; background:#E63946; border-radius:50%; }
+  .logo-label { color:#E63946; font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; }
+  .logo-main { color:white; font-size:20px; font-weight:900; letter-spacing:-0.5px; line-height:1.1; }
+  .logo-uae { color:#E63946; }
+
+  /* Hero headline */
+  .hero {
+    position:absolute; top:120px; left:20px; right:20px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+  .hero-line1 { color:#718096; font-size:11px; text-transform:uppercase; letter-spacing:2px; margin-bottom:8px; }
+  .hero-headline {
+    color:white; font-size:26px; font-weight:900; line-height:1.2;
+    text-shadow:0 0 30px rgba(230,57,70,0.3);
+  }
+  .hero-headline .accent { color:#E63946; display:block; }
+
+  /* Separator */
+  .sep {
+    position:absolute; top:228px; left:20px; right:20px; height:1px;
+    background:linear-gradient(90deg,#E63946,rgba(255,255,255,0.1),transparent);
+    animation: fadeIn 0.5s 0.35s ease both;
+  }
+
+  /* Feature list */
+  .features {
+    position:absolute; top:246px; left:20px; right:20px;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+  .feature { display:flex; align-items:flex-start; gap:10px; margin-bottom:14px; }
+  .feat-icon {
+    width:30px; height:30px; background:rgba(230,57,70,0.12); border:1px solid rgba(230,57,70,0.25);
+    border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    font-size:14px;
+  }
+  .feat-text .feat-title { color:white; font-size:12px; font-weight:700; }
+  .feat-text .feat-sub   { color:#718096; font-size:10px; margin-top:1px; }
+
+  /* Coverage */
+  .coverage {
+    position:absolute; top:430px; left:20px; right:20px;
+    animation: fadeUp 0.6s 0.5s ease both;
+  }
+  .cov-label { color:#4a5568; font-size:9px; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; }
+  .cov-cities { color:#a0aec0; font-size:10px; line-height:1.7; }
+  .cov-cities span { color:#cbd5e0; font-weight:600; }
+
+  /* Contact row */
+  .contact-row {
+    position:absolute; bottom:68px; left:20px; right:20px;
+    display:flex; align-items:center; gap:8px;
+    animation: fadeUp 0.6s 0.55s ease both;
+  }
+  .contact-badge {
+    background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+    border-radius:8px; padding:6px 10px; flex:1;
+  }
+  .cb-label { color:#4a5568; font-size:8px; letter-spacing:1px; text-transform:uppercase; }
+  .cb-val   { color:white; font-size:11px; font-weight:700; margin-top:1px; }
+
+  /* CTA */
+  .cta {
+    position:absolute; bottom:14px; left:20px; right:20px; height:42px;
+    background:linear-gradient(135deg,#25d366,#1da851);
+    border-radius:10px; display:flex; align-items:center; justify-content:center; gap:8px;
+    text-decoration:none;
+    box-shadow:0 4px 20px rgba(37,211,102,0.4);
+    animation: fadeUp 0.6s 0.6s ease both;
+  }
+  .cta svg { width:16px; height:16px; fill:white; flex-shrink:0; }
+  .cta-text { color:white; font-size:13px; font-weight:800; letter-spacing:0.5px; }
+
+  .domain { position:absolute; bottom:4px; right:8px; color:#1f2937; font-size:8px; }
+
+  @keyframes fadeUp   { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:none} }
+  @keyframes fadeDown { from{opacity:0;transform:translateY(-8px)}  to{opacity:1;transform:none} }
+  @keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+</style>
+</head>
+<body>
+<div class="ad" onclick="window.open('https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote','_blank')">
+  <div class="bg1"></div>
+  <div class="top-bar"></div>
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+
+  <div class="logo-area">
+    <div class="logo-dot-row">
+      <div class="logo-dot"></div>
+      <span class="logo-label">Official Supplier</span>
+    </div>
+    <div class="logo-main">Innovative<br>Kitchen <span class="logo-uae">UAE</span></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-line1">Complete Kitchen Solutions</div>
+    <div class="hero-headline">Commercial<br>Kitchen<br><span class="accent">Equipment</span></div>
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="feat-icon">🏭</div>
+      <div class="feat-text">
+        <div class="feat-title">Supply</div>
+        <div class="feat-sub">1000+ products in stock</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🔧</div>
+      <div class="feat-text">
+        <div class="feat-title">Installation</div>
+        <div class="feat-sub">Certified engineers UAE-wide</div>
+      </div>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">📋</div>
+      <div class="feat-text">
+        <div class="feat-title">AMC</div>
+        <div class="feat-sub">Annual maintenance contracts</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="coverage">
+    <div class="cov-label">Coverage</div>
+    <div class="cov-cities">
+      <span>Dubai</span> · <span>Abu Dhabi</span> · <span>Sharjah</span><br>
+      <span>Ajman</span> · <span>Ras Al Khaimah</span> · <span>Fujairah</span>
+    </div>
+  </div>
+
+  <div class="contact-row">
+    <div class="contact-badge">
+      <div class="cb-label">Call / WhatsApp</div>
+      <div class="cb-val">+971 56 724 0634</div>
+    </div>
+    <div class="contact-badge">
+      <div class="cb-label">Email</div>
+      <div class="cb-val" style="font-size:9px">salesexecutive.ae<br>@outlook.com</div>
+    </div>
+  </div>
+
+  <a class="cta" href="https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.524 5.847L.058 23.5l5.788-1.517A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+    <span class="cta-text">Get Free Quote on WhatsApp</span>
+  </a>
+
+  <span class="domain">innovativekitchen.ae</span>
+</div>
+</body>
+</html>

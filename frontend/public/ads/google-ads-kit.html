@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Innovative Kitchen – Google Ads Kit</title>
+<style>
+  :root { --red:#E63946; --dark:#1a1a2e; --green:#25d366; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#f0f4f8; color:#2d3748; line-height:1.6; }
+
+  header {
+    background:linear-gradient(135deg,var(--dark),#0f3460);
+    color:white; padding:32px 40px;
+    border-bottom:4px solid var(--red);
+  }
+  header h1 { font-size:24px; font-weight:900; }
+  header p  { color:#718096; margin-top:4px; font-size:14px; }
+
+  .container { max-width:1100px; margin:0 auto; padding:32px 24px; }
+
+  .section { background:white; border-radius:12px; padding:28px; margin-bottom:28px; box-shadow:0 1px 4px rgba(0,0,0,0.08); }
+  .section-title {
+    font-size:16px; font-weight:800; color:var(--dark); margin-bottom:18px;
+    padding-bottom:10px; border-bottom:2px solid var(--red); display:flex; align-items:center; gap:8px;
+  }
+  .section-title .badge {
+    background:var(--red); color:white; font-size:9px; font-weight:700;
+    padding:2px 8px; border-radius:20px; letter-spacing:1px; text-transform:uppercase;
+  }
+
+  /* ── Keyword table ── */
+  .kw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:10px; }
+  .kw-card {
+    background:#f7fafc; border:1px solid #e2e8f0; border-radius:8px;
+    padding:10px 12px; cursor:pointer; transition:all .15s;
+  }
+  .kw-card:hover { border-color:var(--red); background:#fff5f5; }
+  .kw-text { font-size:12px; font-weight:600; color:#2d3748; }
+  .kw-meta { display:flex; gap:8px; margin-top:4px; }
+  .kw-vol { font-size:10px; color:#718096; }
+  .match-type { font-size:9px; font-weight:700; padding:1px 6px; border-radius:10px; }
+  .exact  { background:#ebf8ff; color:#2b6cb0; }
+  .phrase { background:#f0fff4; color:#276749; }
+  .broad  { background:#fff5f5; color:#c53030; }
+
+  /* ── Search ad copy ── */
+  .ad-preview {
+    border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-bottom:14px;
+    background:#fafafa;
+  }
+  .ad-url   { color:#0d652d; font-size:12px; margin-bottom:2px; }
+  .ad-headline { font-size:18px; color:#1a0dab; font-weight:600; line-height:1.3; margin-bottom:4px; }
+  .ad-headline span { display:block; font-size:15px; color:#1a0dab; }
+  .ad-desc  { font-size:13px; color:#545454; }
+  .ad-tag   { font-size:9px; font-weight:700; letter-spacing:1px; text-transform:uppercase;
+               background:var(--red); color:white; padding:2px 8px; border-radius:10px; display:inline-block; margin-bottom:8px; }
+
+  /* ── Display sizes ── */
+  .sizes-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+  .size-card {
+    border:1px solid #e2e8f0; border-radius:8px; padding:14px;
+    text-align:center; background:#f7fafc;
+  }
+  .size-name  { font-size:13px; font-weight:700; color:var(--dark); }
+  .size-dim   { font-size:20px; font-weight:900; color:var(--red); margin:4px 0; }
+  .size-label { font-size:10px; color:#718096; }
+  .size-btn   {
+    display:inline-block; margin-top:10px; padding:6px 14px;
+    background:var(--dark); color:white; border-radius:6px; text-decoration:none;
+    font-size:11px; font-weight:700;
+  }
+  .size-btn:hover { background:var(--red); }
+
+  /* ── Targeting ── */
+  .target-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+  .target-card { border:1px solid #e2e8f0; border-radius:8px; padding:14px; background:#f7fafc; }
+  .tc-title { font-size:12px; font-weight:800; color:var(--dark); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+  .tc-icon  { font-size:16px; }
+  .tc-item  { font-size:11px; color:#4a5568; padding:3px 0; border-bottom:1px solid #edf2f7; }
+  .tc-item:last-child { border:none; }
+
+  /* ── Negative keywords ── */
+  .neg-grid { display:flex; flex-wrap:wrap; gap:6px; }
+  .neg-kw {
+    background:#fff5f5; border:1px solid #fed7d7; color:#c53030;
+    font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px;
+  }
+
+  /* ── Budget ── */
+  .budget-table { width:100%; border-collapse:collapse; }
+  .budget-table th { background:var(--dark); color:white; padding:10px 14px; font-size:12px; text-align:left; }
+  .budget-table td { padding:10px 14px; font-size:12px; border-bottom:1px solid #e2e8f0; }
+  .budget-table tr:hover td { background:#f7fafc; }
+  .highlight { font-weight:700; color:var(--red); }
+
+  /* ── Call extension ── */
+  .ext-box {
+    background:linear-gradient(135deg,#f0fff4,#e6fffa);
+    border:1px solid #9ae6b4; border-radius:8px; padding:16px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .ext-icon { font-size:28px; }
+  .ext-title { font-weight:700; font-size:14px; color:#276749; }
+  .ext-val   { font-size:16px; font-weight:900; color:#1a202c; margin-top:2px; }
+  .ext-sub   { font-size:11px; color:#718096; }
+
+  .tip {
+    background:#fffbeb; border:1px solid #fbbf24; border-radius:8px;
+    padding:12px 16px; font-size:12px; color:#92400e; margin-top:12px;
+  }
+  .tip strong { color:#78350f; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🚀 Innovative Kitchen — Google Ads Kit</h1>
+  <p>Search keywords · Ad copy · Display creatives · Targeting · Budget guide &nbsp;|&nbsp; <strong style="color:#9ae6b4">160+ keywords · With &amp; Without Location · Commercial + Home · Arabic</strong></p>
+</header>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════════════
+       1. GOOGLE SEARCH KEYWORDS
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">
+      🔍 Google Search Keywords
+      <span class="badge">Copy to Google Ads</span>
+    </div>
+
+    <p style="font-size:12px;color:#718096;margin-bottom:6px">
+      <strong style="color:#2d3748">Match types:</strong>
+      <span class="match-type exact">Exact</span> = [keyword] exact match — highest intent, lower volume.
+      <span class="match-type phrase">Phrase</span> = "keyword" phrase match — balanced.
+      <span class="match-type broad">Broad</span> = keyword — widest reach, needs negative keywords.
+    </p>
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-bottom:18px;font-size:12px;color:#1e40af">
+      <strong>💡 Always add BOTH versions in Google Ads:</strong> UAE residents already in Dubai/UAE often search <em>without</em> typing "UAE" or "Dubai" — Google uses their location automatically.
+      Add each keyword twice: once with location (e.g. <em>kitchen equipment UAE</em>) and once without (e.g. <em>kitchen equipment</em>).
+      Both are shown below — use all of them.
+    </div>
+
+    <!-- GROUP 1 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:14px 0 4px">🏆 Primary – Highest Intent</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location (targeting people outside UAE or specifying location)</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">commercial kitchen equipment UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial kitchen equipment Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment supplier UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">restaurant equipment Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">hotel kitchen equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">catering equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial kitchen supplier Dubai</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">buy commercial kitchen equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location (UAE users already in UAE — Google knows their city)</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment supplier</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">restaurant equipment supplier</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen supplier</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">hotel kitchen equipment supplier</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">catering equipment supplier</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">buy commercial kitchen equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen equipment price</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+    </div>
+
+    <!-- GROUP 2 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">📍 City-Targeted</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With city name</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">kitchen equipment Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment Abu Dhabi</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment Sharjah</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment Ajman</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment Ras Al Khaimah</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Low Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">restaurant equipment Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">restaurant equipment Abu Dhabi</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial oven Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial refrigerator Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial dishwasher Dubai</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without city (user is already in that city)</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">restaurant equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen equipment near me</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment near me</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial oven near me</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial refrigerator near me</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial dishwasher near me</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+    </div>
+
+    <!-- GROUP 3 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🏨 Segment-Specific (Restaurant / Hotel / Cafe / Bakery)</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">restaurant kitchen equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">hotel kitchen equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">cafe equipment Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card"><div class="kw-text">catering equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">food service equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">bakery equipment UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial coffee machine UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">industrial kitchen equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">restaurant kitchen equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">hotel kitchen equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">cafe equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">catering equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">food service equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">bakery equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial coffee machine</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">industrial kitchen equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+    </div>
+
+    <!-- GROUP 4 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🔧 Service Keywords (Installation + AMC + Repair)</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">kitchen equipment installation UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial kitchen AMC UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen AMC Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment maintenance UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment repair Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial kitchen setup Dubai</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment installation</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen AMC</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment AMC</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment maintenance</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment repair near me</div><div class="kw-meta"><span class="match-type exact">Exact</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial kitchen setup</div><div class="kw-meta"><span class="match-type phrase">Phrase</span></div></div>
+    </div>
+
+    <!-- GROUP 5 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🏠 Home Delivery <span style="background:#d1fae5;color:#065f46;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;">Residential Buyers</span></p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">kitchen equipment home delivery UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment delivery Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">buy kitchen equipment online UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen tools online UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen products delivery UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen appliances home delivery Dubai</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">order kitchen equipment online UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen equipment shop UAE online</div><div class="kw-meta"><span class="match-type broad">Broad</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment home delivery</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment delivery</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">buy kitchen equipment online</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen tools online</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen products online</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen appliances home delivery</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">order kitchen equipment online</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment online shop</div><div class="kw-meta"><span class="match-type broad">Broad</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+
+    <!-- GROUP 6 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🍳 General Kitchen – High Volume Terms</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">kitchen equipment UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen tools UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen products UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen accessories UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen appliances UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card"><div class="kw-text">cooking equipment UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen utensils UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen gadgets UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen supplies UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen items online UAE</div><div class="kw-meta"><span class="match-type broad">Broad</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen equipment</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen tools</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen products</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen accessories</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen appliances</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">cooking equipment</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen utensils</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen gadgets</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen supplies</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen items online</div><div class="kw-meta"><span class="match-type broad">Broad</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+
+    <!-- GROUP 7 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🔎 Product-Specific – High Buying Intent</p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">gas cooker UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial gas range Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">deep fryer UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial refrigerator UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">chest freezer UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">food warmer UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">bain marie UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">dough mixer UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">meat slicer Dubai</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">commercial blender UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">pizza oven UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">combi oven UAE</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">display chiller Dubai</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">kitchen exhaust hood UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">stainless steel work table UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">grease trap UAE</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Low Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">gas cooker</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial gas range</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">deep fryer</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial refrigerator</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">chest freezer</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">food warmer</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">bain marie</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">dough mixer</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">meat slicer</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">commercial blender</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">pizza oven</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">combi oven</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">display chiller</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">kitchen exhaust hood</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">stainless steel work table</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">grease trap</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+    </div>
+
+    <!-- GROUP 8 -->
+    <p style="font-size:13px;font-weight:700;color:var(--dark);margin:20px 0 4px">🔤 Arabic + Bilingual Keywords <span style="background:#d1fae5;color:#065f46;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-left:6px;">UAE Arabic Audience</span></p>
+    <p style="font-size:10px;color:#718096;margin-bottom:6px">▸ With location</p>
+    <div class="kw-grid">
+      <div class="kw-card"><div class="kw-text">معدات المطبخ دبي</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">معدات مطبخ تجاري الإمارات</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">أدوات المطبخ الإمارات</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">توصيل معدات مطبخ دبي</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">أجهزة مطبخ تجاري أبوظبي</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card"><div class="kw-text">معدات مطابخ المطاعم الإمارات</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+    </div>
+    <p style="font-size:10px;color:#2563eb;font-weight:600;margin:8px 0 6px">▸ Without location</p>
+    <div class="kw-grid">
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">معدات المطبخ</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">معدات مطبخ تجاري</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">أدوات المطبخ</div><div class="kw-meta"><span class="match-type exact">Exact</span><span class="kw-vol">Very High</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">توصيل معدات مطبخ</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">أجهزة مطبخ تجاري</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">Med Vol</span></div></div>
+      <div class="kw-card" style="border-color:#bfdbfe;background:#eff6ff"><div class="kw-text">معدات مطابخ المطاعم</div><div class="kw-meta"><span class="match-type phrase">Phrase</span><span class="kw-vol">High Vol</span></div></div>
+    </div>
+    <div class="tip" style="margin-top:12px">
+      <strong>💡 Arabic campaign tip:</strong> Create a separate Ad Group with Arabic keywords + Arabic ad copy. Set language targeting to Arabic. This gives you 100% more reach across UAE nationals and Arab expats who search in Arabic.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       2. GOOGLE SEARCH AD COPY
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">📝 Google Search Ad Copy <span class="badge">3 Ads Ready</span></div>
+    <p style="font-size:12px;color:#718096;margin-bottom:18px">Responsive Search Ads (RSA) — paste headlines & descriptions into Google Ads. Mix all 15 headlines and 4 descriptions for maximum coverage.</p>
+
+    <div class="ad-tag">Ad 1 – Main Brand Ad</div>
+    <div class="ad-preview">
+      <div class="ad-url">innovativekitchen.ae › Commercial-Kitchen › UAE</div>
+      <div class="ad-headline">
+        Innovative Kitchen UAE – #1 Supplier
+        <span>Commercial Kitchen Equipment UAE</span>
+        <span>Supply · Installation · AMC</span>
+      </div>
+      <div class="ad-desc">UAE's trusted commercial kitchen equipment supplier. 1000+ products. Dubai · Abu Dhabi · Sharjah · All UAE. Call +971 56 724 0634 for instant quote.</div>
+    </div>
+
+    <div class="ad-tag">Ad 2 – Urgency / WhatsApp CTA</div>
+    <div class="ad-preview">
+      <div class="ad-url">innovativekitchen.ae › Get-Quote › WhatsApp</div>
+      <div class="ad-headline">
+        Get Kitchen Equipment Quote Today
+        <span>WhatsApp +971 56 724 0634 Now</span>
+        <span>Restaurant · Hotel · Cafe Equipment UAE</span>
+      </div>
+      <div class="ad-desc">Fast delivery across UAE. Professional installation by certified engineers. Annual maintenance contracts available. Email: salesexecutive.ae@outlook.com</div>
+    </div>
+
+    <div class="ad-tag">Ad 3 – Price / Offer Focus</div>
+    <div class="ad-preview">
+      <div class="ad-url">innovativekitchen.ae › Best-Price › Kitchen-Equipment</div>
+      <div class="ad-headline">
+        Best Price Kitchen Equipment UAE
+        <span>Commercial Ovens · Fridges · Dishwashers</span>
+        <span>Authorised Brands – Huge Stock Dubai</span>
+      </div>
+      <div class="ad-desc">Shop online or call +971 56 724 0634. Commercial kitchen equipment for restaurants, hotels & caterers. Free quote · Fast delivery · Installation.</div>
+    </div>
+
+    <div class="ad-tag" style="background:#065f46;">Ad 4 – Home Delivery (NEW)</div>
+    <div class="ad-preview" style="border-color:#9ae6b4;">
+      <div class="ad-url">innovativekitchen.ae › Kitchen-Tools › Home-Delivery</div>
+      <div class="ad-headline">
+        Kitchen Equipment – Home Delivery UAE
+        <span>Kitchen Tools · Products · Appliances Online</span>
+        <span>Delivered to Your Door – All UAE Cities</span>
+      </div>
+      <div class="ad-desc">Shop kitchen equipment, tools & products online. Home delivery across Dubai, Abu Dhabi, Sharjah & all UAE. Order now or WhatsApp +971 56 724 0634 for a quote.</div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Pro Tips:</strong> Add Call Extensions with +971 56 724 0634 so phone number appears directly in search results.
+      Add Sitelink Extensions: "Shop Now", "Get Quote", "Contact Us", "About Us".
+      Add Callout Extensions: "Free Installation Quote", "UAE-Wide Delivery", "24/7 WhatsApp Support", "Authorised Brands".
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       3. DISPLAY AD FILES
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">🎨 Display Ad Creatives <span class="badge">4 Sizes Ready</span></div>
+    <p style="font-size:12px;color:#718096;margin-bottom:18px">All 4 HTML5 ad files are in <code style="background:#f0f4f8;padding:2px 5px;border-radius:4px">/ads/</code> folder. Upload directly to Google Ads → Display Campaign → Ad Assets → Upload HTML5.</p>
+
+    <div class="sizes-grid">
+      <div class="size-card">
+        <div class="size-name">Medium Rectangle</div>
+        <div class="size-dim">300×250</div>
+        <div class="size-label">Most common · Sidebar / Article</div>
+        <a href="display-300x250.html" target="_blank" class="size-btn">Preview Ad</a>
+      </div>
+      <div class="size-card">
+        <div class="size-name">Leaderboard</div>
+        <div class="size-dim">728×90</div>
+        <div class="size-label">Desktop top/bottom of page</div>
+        <a href="display-728x90.html" target="_blank" class="size-btn">Preview Ad</a>
+      </div>
+      <div class="size-card">
+        <div class="size-name">Mobile Banner</div>
+        <div class="size-dim">320×50</div>
+        <div class="size-label">Mobile top/bottom · Highest reach</div>
+        <a href="display-320x50.html" target="_blank" class="size-btn">Preview Ad</a>
+      </div>
+      <div class="size-card">
+        <div class="size-name">Half Page</div>
+        <div class="size-dim">300×600</div>
+        <div class="size-label">Premium · Highest engagement</div>
+        <a href="display-300x600.html" target="_blank" class="size-btn">Preview Ad</a>
+      </div>
+    </div>
+
+    <div class="tip" style="margin-top:16px">
+      <strong>💡 To update phone/email in ads:</strong> Open each HTML file in a text editor → find the wa-link and phone-num values near the top → replace with new number. All links point to WhatsApp for instant lead generation.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       4. AUDIENCE TARGETING
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">🎯 Audience & Targeting Strategy</div>
+    <div class="target-grid">
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">📍</span> Geographic Targeting</div>
+        <div class="tc-item">Dubai (primary — 40% budget)</div>
+        <div class="tc-item">Abu Dhabi (25% budget)</div>
+        <div class="tc-item">Sharjah (15% budget)</div>
+        <div class="tc-item">Ajman, RAK, Fujairah (20%)</div>
+      </div>
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">👔</span> In-Market Audiences</div>
+        <div class="tc-item">Food service & restaurant owners</div>
+        <div class="tc-item">Commercial kitchen buyers</div>
+        <div class="tc-item">B2B kitchen equipment purchasers</div>
+        <div class="tc-item">Hotel & hospitality procurement</div>
+      </div>
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">🌐</span> Placement Targeting</div>
+        <div class="tc-item">Hospitality industry websites</div>
+        <div class="tc-item">UAE food & restaurant blogs</div>
+        <div class="tc-item">khaleejitimes.com business section</div>
+        <div class="tc-item">Gulf News business, gulfbusiness.com</div>
+      </div>
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">🔗</span> Remarketing Lists</div>
+        <div class="tc-item">Visited /shop but did not enquire</div>
+        <div class="tc-item">Viewed product page (any product)</div>
+        <div class="tc-item">Visited /contact but didn't submit</div>
+        <div class="tc-item">Cart abandoned (did not checkout)</div>
+      </div>
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">📱</span> Device & Schedule</div>
+        <div class="tc-item">Mobile: +20% bid adjustment</div>
+        <div class="tc-item">Sun–Thu 8am–7pm: full bids</div>
+        <div class="tc-item">Fri–Sat: -30% bid adjustment</div>
+        <div class="tc-item">After 10pm: -50% bid adjustment</div>
+      </div>
+      <div class="target-card">
+        <div class="tc-title"><span class="tc-icon">🌍</span> Language Targeting</div>
+        <div class="tc-item">English (primary)</div>
+        <div class="tc-item">Arabic (secondary)</div>
+        <div class="tc-item">All languages (Display Network)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       5. NEGATIVE KEYWORDS
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">🚫 Negative Keywords <span class="badge">Block Wasted Spend</span></div>
+    <div class="neg-grid">
+      <span class="neg-kw">free</span>
+      <span class="neg-kw">second hand</span>
+      <span class="neg-kw">used kitchen equipment</span>
+      <span class="neg-kw">cheap</span>
+      <span class="neg-kw">DIY kitchen</span>
+      <span class="neg-kw">home kitchen design</span>
+      <span class="neg-kw">kitchen renovation contractor</span>
+      <span class="neg-kw">kitchen design software</span>
+      <span class="neg-kw">IKEA kitchen</span>
+      <span class="neg-kw">recipe</span>
+      <span class="neg-kw">cooking class</span>
+      <span class="neg-kw">jobs</span>
+      <span class="neg-kw">career</span>
+      <span class="neg-kw">salary</span>
+      <span class="neg-kw">PDF manual</span>
+      <span class="neg-kw">download</span>
+      <span class="neg-kw">rent kitchen</span>
+      <span class="neg-kw">cloud kitchen rent</span>
+      <span class="neg-kw">how to cook</span>
+      <span class="neg-kw">tutorial</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       6. BUDGET GUIDE
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">💰 Monthly Budget Guide</div>
+    <table class="budget-table">
+      <thead>
+        <tr><th>Campaign Type</th><th>Daily Budget</th><th>Monthly Est.</th><th>Expected Leads</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Search – Brand</strong></td><td>AED 30</td><td>AED 900</td><td>15–25/mo</td><td>Protect your brand name</td></tr>
+        <tr><td><strong>Search – Commercial</strong></td><td>AED 150</td><td>AED 4,500</td><td>40–80/mo</td><td class="highlight">Highest ROI — start here</td></tr>
+        <tr><td><strong>Search – Home Delivery</strong></td><td>AED 60</td><td>AED 1,800</td><td>25–50/mo</td><td>kitchen tools, products, home delivery</td></tr>
+        <tr><td><strong>Search – Arabic Keywords</strong></td><td>AED 40</td><td>AED 1,200</td><td>15–30/mo</td><td>UAE nationals + Arab expats</td></tr>
+        <tr><td><strong>Display – Remarketing</strong></td><td>AED 50</td><td>AED 1,500</td><td>10–20/mo</td><td>Re-engage site visitors</td></tr>
+        <tr><td><strong>Display – Awareness</strong></td><td>AED 80</td><td>AED 2,400</td><td>Brand visibility</td><td>Use the 4 HTML5 ad files</td></tr>
+        <tr style="background:#f0fff4"><td><strong>Total Starter</strong></td><td class="highlight">AED 410</td><td class="highlight">AED 12,300</td><td class="highlight">105–205 leads</td><td>Commercial + Home + Arabic</td></tr>
+      </tbody>
+    </table>
+    <div class="tip" style="margin-top:12px">
+      <strong>💡 Start with Search Keywords only (AED 150/day).</strong> Once you see which keywords convert, add Display Remarketing. Typical UAE B2B kitchen equipment Cost Per Lead: AED 70–180.
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════
+       7. CALL EXTENSION
+       ══════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-title">📞 Call Extension Setup</div>
+    <div class="ext-box">
+      <div class="ext-icon">📲</div>
+      <div>
+        <div class="ext-title">Add this as a Call Extension in every campaign</div>
+        <div class="ext-val">+971 56 724 0634</div>
+        <div class="ext-sub">Google Ads → Assets → Call → Add phone number. Set schedule: Sun–Thu 9am–6pm, Sat 10am–3pm.<br>
+        Also add Message Extension with: salesexecutive.ae@outlook.com</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

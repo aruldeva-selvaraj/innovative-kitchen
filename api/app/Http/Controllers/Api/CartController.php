@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
@@ -15,26 +17,27 @@ class CartController extends Controller
         return Cart::firstOrCreate(['user_id' => $request->user()->id]);
     }
 
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse
     {
         $cart = $this->getOrCreateCart($request);
         return response()->json($cart->load('items.product'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            'product_id' => 'required|exists:products,id',
-            'quantity'   => 'required|integer|min:1',
+            'product_id' => 'required|integer|exists:products,id',
+            'quantity'   => 'required|integer|min:1|max:100',
         ]);
 
         $cart = $this->getOrCreateCart($request);
         $item = $cart->items()->where('product_id', $data['product_id'])->first();
 
         if ($item) {
-            $item->increment('quantity', $data['quantity']);
+            $newQty = $item->quantity + $data['quantity'];
+            $item->update(['quantity' => min($newQty, 100)]);
         } else {
-            $product = Product::findOrFail($data['product_id']);
+            $product = Product::active()->findOrFail($data['product_id']);
             $cart->items()->create([
                 'product_id' => $product->id,
                 'quantity'   => $data['quantity'],
@@ -45,24 +48,44 @@ class CartController extends Controller
         return response()->json($cart->fresh('items.product'));
     }
 
-    public function update(Request $request, int $id)
+    /**
+     * OWASP A01 — Broken Access Control
+     * Verify the item belongs to the authenticated user's cart before modifying.
+     */
+    public function update(Request $request, int $id): JsonResponse
     {
-        $data = $request->validate(['quantity' => 'required|integer|min:1']);
-        $item = CartItem::findOrFail($id);
+        $data = $request->validate(['quantity' => 'required|integer|min:1|max:100']);
+
+        $item = $this->ownedItem($request, $id);
         $item->update(['quantity' => $data['quantity']]);
+
         return response()->json($item);
     }
 
-    public function destroy(int $id)
+    public function destroy(Request $request, int $id): JsonResponse
     {
-        CartItem::findOrFail($id)->delete();
+        $this->ownedItem($request, $id)->delete();
         return response()->json(['message' => 'Removed']);
     }
 
-    public function clear(Request $request)
+    public function clear(Request $request): JsonResponse
     {
-        $cart = $this->getOrCreateCart($request);
-        $cart->items()->delete();
+        $this->getOrCreateCart($request)->items()->delete();
         return response()->json(['message' => 'Cart cleared']);
+    }
+
+    /**
+     * Return the cart item only if it belongs to the requesting user's cart.
+     * Returns 403 if the item exists but belongs to a different user (IDOR prevention).
+     */
+    private function ownedItem(Request $request, int $itemId): CartItem
+    {
+        $item = CartItem::findOrFail($itemId);
+
+        if ($item->cart->user_id !== $request->user()->id) {
+            abort(Response::HTTP_FORBIDDEN, 'Access denied.');
+        }
+
+        return $item;
     }
 }

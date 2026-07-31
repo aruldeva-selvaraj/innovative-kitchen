@@ -1,0 +1,61 @@
+# 1. Install Laravel dependencies
+cd api
+composer install
+
+# 2. Install Filament 3
+composer require filament/filament:"^3.3"
+
+# 3. Publish Filament assets and run migrations
+php artisan filament:install --panels
+# → enter:  admin   (when asked for panel ID)
+# → press Y to confirm overwrite if prompted (my provider will survive because it uses discoverResources)
+
+# 4. Create storage symlink for uploaded images
+php artisan storage:link
+
+# 5. Run all seeders (creates admin user + catalogue data)
+php artisan migrate --seed
+
+# 6. Start the Laravel server
+php artisan serve
+
+------------------------------------------------------------------------
+http://localhost:8000/admin
+Login: admin@innovativekitchen.ae · Password: Admin@IK2025!
+
+Change the password after first login via the Filament profile page.
+
+All images use placehold.co stubs — replace with actual images extracted from the PDFs at api/public/assets/products/{slug}.jpg.
+
+To seed: php artisan db:seed --class=CatalogueSeeder (or php artisan db:seed for the full sequence).
+----------------------------------------------------------------------------
+# Nginx config for api.innovativekitchen.ae
+server {
+    server_name api.innovativekitchen.ae;
+    root /var/www/api/public;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/var/run/php/php8.5-fpm.sock;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+    }
+}
+
+Update your .env on the Laravel server:
+
+
+APP_URL=https://api.innovativekitchen.ae
+FRONTEND_URL=https://www.innovativekitchen.ae
+-----------------------------------------------------------------------------------------
+Admin login credentials (from the seeder)
+Go to http://localhost:8000/admin (or your production URL) and log in with:
+
+
+Email:    admin@innovativekitchen.ae
+Password: Admin@IK2025!
+Change this password immediately after first login via the profile icon → Edit Profile.
+-------------------------------------------------------

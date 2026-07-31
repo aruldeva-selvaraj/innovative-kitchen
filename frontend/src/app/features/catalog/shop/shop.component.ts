@@ -4,6 +4,7 @@ import { ProductService } from '../data-access/product.service';
 import { ProductFilters, PaginatedProducts } from '../data-access/product.model';
 import { ShopFiltersComponent } from './shop-filters.component';
 import { ProductCardComponent } from '../../../shared/ui/product-card/product-card.component';
+import { SeoService } from '../../../core/services/seo.service';
 
 @Component({
   selector: 'app-shop',
@@ -135,6 +136,7 @@ import { ProductCardComponent } from '../../../shared/ui/product-card/product-ca
 export class ShopComponent implements OnInit {
   private readonly productService = inject(ProductService);
   private readonly route = inject(ActivatedRoute);
+  private readonly seo = inject(SeoService);
 
   readonly filters = signal<ProductFilters>({ page: 1, per_page: 24, sort: 'popular' });
   readonly result = signal<PaginatedProducts | null>(null);
@@ -148,6 +150,13 @@ export class ShopComponent implements OnInit {
   });
 
   ngOnInit() {
+    this.seo.set({
+      title: 'Shop Commercial Kitchen Equipment UAE | Innovative Kitchen – All Products',
+      description: 'Browse our full range of commercial kitchen equipment at Innovative Kitchen UAE. Ovens, refrigeration, dishwashers, grills, fryers & catering supplies. Best prices with fast delivery across all UAE emirates.',
+      keywords: 'commercial kitchen equipment UAE, buy kitchen equipment Dubai, restaurant equipment online UAE, catering supplies UAE, Innovative Kitchen shop, professional kitchen products Abu Dhabi',
+      canonical: 'https://www.innovativekitchen.ae/shop',
+      breadcrumbs: [{ name: 'Shop', url: '/shop' }],
+    });
     this.route.queryParams.subscribe(params => {
       this.filters.update(f => ({ ...f, ...params, page: 1 }));
       this.loadProducts();

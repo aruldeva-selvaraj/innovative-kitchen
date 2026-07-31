@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="ad.size" content="width=320,height=50">
+<!-- ═══════════════════════════════════════════════
+     INNOVATIVE KITCHEN — 320×50 Mobile Banner
+     UPDATE CONTACT: change wa-link & phone below
+     ═══════════════════════════════════════════════ -->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:320px; height:50px; overflow:hidden; font-family:'Segoe UI',Arial,sans-serif; }
+
+  .ad {
+    width:320px; height:50px; cursor:pointer; position:relative; overflow:hidden;
+    background:linear-gradient(135deg,#1a1a2e,#0f3460);
+    display:flex; align-items:center;
+    border-top:2px solid #E63946;
+  }
+
+  /* Animated side glow */
+  .glow {
+    position:absolute; left:0; top:0; bottom:0; width:3px;
+    background:#E63946;
+    box-shadow:0 0 8px #E63946;
+    animation:pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* Brand */
+  .brand { padding:0 10px 0 10px; flex-shrink:0; animation:fadeIn 0.4s ease; }
+  .brand-name { color:white; font-size:11px; font-weight:800; line-height:1.1; }
+  .brand-sub  { color:#E63946; font-size:7px; font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+
+  /* Divider */
+  .div { width:1px; height:30px; background:rgba(255,255,255,0.15); flex-shrink:0; }
+
+  /* Text */
+  .text-section { flex:1; padding:0 8px; animation:fadeUp 0.4s 0.1s ease both; }
+  .main { color:white; font-size:11px; font-weight:700; white-space:nowrap; }
+  .main span { color:#E63946; }
+  .sub { color:#718096; font-size:8px; margin-top:1px; }
+
+  /* Phone */
+  .phone { color:#90cdf4; font-size:10px; font-weight:700; padding:0 8px; white-space:nowrap; animation:fadeIn 0.4s 0.2s ease both; }
+
+  /* CTA */
+  .cta {
+    margin-right:8px; padding:0 10px; height:32px; flex-shrink:0;
+    background:linear-gradient(135deg,#25d366,#1da851);
+    border-radius:6px; display:flex; align-items:center; gap:4px; text-decoration:none;
+    animation:fadeIn 0.4s 0.3s ease both;
+    box-shadow:0 2px 8px rgba(37,211,102,0.3);
+  }
+  .cta svg { width:10px; height:10px; fill:white; }
+  .cta-text { color:white; font-size:9px; font-weight:700; white-space:nowrap; }
+
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<div class="ad" onclick="window.open('https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote','_blank')">
+  <div class="glow"></div>
+
+  <div class="brand">
+    <div class="brand-name">Innovative<br>Kitchen</div>
+    <div class="brand-sub">UAE</div>
+  </div>
+
+  <div class="div"></div>
+
+  <div class="text-section">
+    <div class="main">Commercial Kitchen <span>Equipment</span></div>
+    <div class="sub">Supply · Installation · AMC · All UAE</div>
+  </div>
+
+  <div class="phone">📞 +971 56 724 0634</div>
+
+  <a class="cta" href="https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.524 5.847L.058 23.5l5.788-1.517A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+    <span class="cta-text">Quote</span>
+  </a>
+</div>
+</body>
+</html>

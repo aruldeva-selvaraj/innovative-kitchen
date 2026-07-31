@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Block non-content pages
+Disallow: /cart
+Disallow: /checkout
+Disallow: /wishlist
+Disallow: /compare
+Disallow: /account
+Disallow: /search
+Disallow: /api/
+
+# Allow Googlebot images
+User-agent: Googlebot-Image
+Allow: /assets/
+
+# Sitemap
+Sitemap: https://www.innovativekitchen.ae/sitemap.xml
+
+# Crawl delay for courtesy
+Crawl-delay: 1

@@ -1,5 +1,6 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SeoService } from '../../../core/services/seo.service';
 import { ProductService } from '../data-access/product.service';
 import { Product } from '../data-access/product.model';
 import { CartService } from '../../../core/services/cart.service';
@@ -142,6 +143,7 @@ export class ProductDetailComponent implements OnInit {
   private readonly cart = inject(CartService);
   private readonly wishlist = inject(WishlistService);
   private readonly whatsapp = inject(WhatsappService);
+  private readonly seo = inject(SeoService);
 
   readonly product = signal<Product | null>(null);
   readonly related = signal<Product[]>([]);
@@ -162,6 +164,30 @@ export class ProductDetailComponent implements OnInit {
           this.product.set(p);
           this.activeImage.set(p.thumbnail);
           this.loading.set(false);
+          this.seo.set({
+            title: `${p.name} | Buy Online UAE`,
+            description: p.short_description
+              ?? `Buy ${p.name} in UAE. ${p.brand?.name ?? ''} commercial kitchen equipment. Best price with fast delivery across Dubai, Abu Dhabi & Sharjah.`,
+            keywords: `${p.name}, ${p.brand?.name ?? ''} UAE, buy ${p.name} Dubai, commercial kitchen equipment UAE`,
+            image: p.thumbnail,
+            type: 'product',
+            canonical: `https://www.innovativekitchen.ae/shop/product/${p.slug}`,
+            breadcrumbs: [
+              { name: 'Shop', url: '/shop' },
+              ...(p.category ? [{ name: p.category.name, url: `/shop/category/${p.category.slug}` }] : []),
+              { name: p.name, url: `/shop/product/${p.slug}` },
+            ],
+            jsonLd: this.seo.buildProduct({
+              name: p.name,
+              description: p.short_description ?? p.name,
+              sku: p.sku ?? p.slug,
+              price: p.price,
+              image: p.thumbnail,
+              slug: p.slug,
+              brand: p.brand?.name,
+              inStock: p.in_stock,
+            }),
+          });
           this.productService.getRelated(p.id).subscribe(r => this.related.set(r));
         },
         error: () => this.loading.set(false),

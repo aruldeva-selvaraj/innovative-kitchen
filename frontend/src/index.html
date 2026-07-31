@@ -1,14 +1,188 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
   <meta charset="utf-8">
-  <title>MyShop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- ── Primary SEO ── -->
+  <!-- Note: title, description, og:*, twitter:*, canonical and JSON-LD are all
+       overridden dynamically by SeoService (reads phone/email from environment).
+       Update contact info ONLY in src/environments/environment*.ts. -->
+  <title>Innovative Kitchen | Commercial Kitchen Equipment Supplier UAE – Dubai, Abu Dhabi, Sharjah</title>
+  <meta name="description" content="Innovative Kitchen – UAE's trusted supplier of commercial kitchen equipment. Complete kitchen solutions for restaurants, hotels, cafes & caterers. Supply, installation & AMC across all UAE emirates.">
+  <meta name="keywords" content="Innovative Kitchen UAE, commercial kitchen equipment UAE, kitchen equipment Dubai, restaurant equipment UAE, hotel kitchen equipment Abu Dhabi, catering equipment Sharjah, commercial kitchen supplier Dubai, professional kitchen appliances UAE, commercial refrigeration UAE, commercial oven UAE, industrial kitchen equipment UAE, kitchen installation UAE, commercial dishwasher UAE, food service equipment UAE, kitchen AMC UAE">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="author" content="Innovative Kitchen UAE">
+  <meta name="theme-color" content="#E63946">
+
+  <!-- ── Geo / Local UAE ── -->
+  <meta name="geo.region" content="AE-DU">
+  <meta name="geo.placename" content="Dubai, United Arab Emirates">
+  <meta name="geo.position" content="25.2048;55.2708">
+  <meta name="ICBM" content="25.2048, 55.2708">
+  <meta name="language" content="English">
+  <meta name="audience" content="business">
+
+  <!-- ── Open Graph (fallback – overridden by SeoService) ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Innovative Kitchen">
+  <meta property="og:title" content="Innovative Kitchen | Commercial Kitchen Equipment UAE – Dubai, Abu Dhabi">
+  <meta property="og:description" content="UAE's trusted supplier of commercial kitchen equipment for restaurants, hotels, cafes & caterers. Supply, installation & AMC. Dubai · Abu Dhabi · Sharjah · Ajman · Ras Al Khaimah · Fujairah.">
+  <meta property="og:image" content="https://www.innovativekitchen.ae/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Innovative Kitchen – Commercial Kitchen Equipment UAE">
+  <meta property="og:url" content="https://www.innovativekitchen.ae/">
+  <meta property="og:locale" content="en_AE">
+
+  <!-- ── Twitter Card (fallback – overridden by SeoService) ── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Innovative Kitchen | Commercial Kitchen Equipment UAE">
+  <meta name="twitter:description" content="UAE's trusted supplier of commercial kitchen equipment. Supply, installation & AMC across Dubai, Abu Dhabi, Sharjah & all UAE.">
+  <meta name="twitter:image" content="https://www.innovativekitchen.ae/assets/og-image.jpg">
+
+  <!-- ── Canonical ── -->
+  <link rel="canonical" href="https://www.innovativekitchen.ae/">
+
+  <!-- ── Base JSON-LD (contact info injected dynamically by SeoService from environment) ── -->
+  <!-- Full Organization + LocalBusiness + WebSite schema is injected by AppComponent
+       on boot via SeoService.injectBaseSchema(), which reads phone/email from
+       src/environments/environment*.ts — update ONLY there when contact info changes. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.innovativekitchen.ae/#organization",
+        "name": "Innovative Kitchen",
+        "alternateName": "Innovative Kitchen UAE",
+        "url": "https://www.innovativekitchen.ae",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.innovativekitchen.ae/assets/logo.png",
+          "width": 200,
+          "height": 60
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "AE",
+          "addressLocality": "Dubai",
+          "addressRegion": "Dubai"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.innovativekitchen.ae/#website",
+        "url": "https://www.innovativekitchen.ae",
+        "name": "Innovative Kitchen",
+        "description": "UAE's trusted supplier of commercial kitchen equipment – Supply, Installation & AMC",
+        "publisher": { "@id": "https://www.innovativekitchen.ae/#organization" },
+        "inLanguage": "en-AE",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://www.innovativekitchen.ae/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.innovativekitchen.ae/#localbusiness",
+        "name": "Innovative Kitchen",
+        "image": "https://www.innovativekitchen.ae/assets/og-image.jpg",
+        "url": "https://www.innovativekitchen.ae",
+        "priceRange": "$$",
+        "currenciesAccepted": "AED",
+        "paymentAccepted": "Credit Card, Bank Transfer, Cash on Delivery",
+        "description": "Leading commercial kitchen equipment supplier in UAE offering complete kitchen solutions — supply, installation, and annual maintenance contracts for restaurants, hotels, cafes, and catering businesses.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "AE",
+          "addressLocality": "Dubai",
+          "addressRegion": "Dubai"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 25.2048,
+          "longitude": 55.2708
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "15:00"
+          }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Dubai" },
+          { "@type": "City", "name": "Abu Dhabi" },
+          { "@type": "City", "name": "Sharjah" },
+          { "@type": "City", "name": "Ajman" },
+          { "@type": "City", "name": "Ras Al Khaimah" },
+          { "@type": "City", "name": "Fujairah" },
+          { "@type": "City", "name": "Umm Al Quwain" },
+          { "@type": "Country", "name": "United Arab Emirates" }
+        ],
+        "hasMap": "https://maps.google.com/?q=Innovative+Kitchen+Dubai+UAE",
+        "knowsAbout": [
+          "Commercial Kitchen Equipment",
+          "Restaurant Equipment UAE",
+          "Hotel Kitchen Equipment",
+          "Catering Equipment",
+          "Kitchen Installation UAE",
+          "Annual Maintenance Contract Kitchen UAE"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- ── Preconnects ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- ── Fonts ── -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!-- ── Favicon ── -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 </head>
 <body class="bg-gray-50">
+
+  <!--
+    app-root bootstraps the Angular application.
+    ShellComponent (rendered inside app-root) provides the page layout:
+
+      ┌─────────────────────────────────┐
+      │  <app-header />                 │  ← navigation, search, cart
+      ├─────────────────────────────────┤
+      │  <main>                         │
+      │    <router-outlet />            │  ← routed page content
+      │  </main>                        │
+      ├─────────────────────────────────┤
+      │  <app-footer />                 │  ← links, contact, copyright
+      ├─────────────────────────────────┤
+      │  <app-cookie-consent />         │  ← GDPR cookie banner (fixed bottom)
+      └─────────────────────────────────┘
+
+    SEO (title, meta, JSON-LD) is managed by SeoService.
+  -->
   <app-root></app-root>
+
+  <noscript>Please enable JavaScript to continue using this application.</noscript>
+
 </body>
 </html>

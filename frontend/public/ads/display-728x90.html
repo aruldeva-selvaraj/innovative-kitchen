@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="ad.size" content="width=728,height=90">
+<!-- ═══════════════════════════════════════════════
+     INNOVATIVE KITCHEN — 728×90 Leaderboard
+     UPDATE CONTACT: change wa-link & phone-num below
+     ═══════════════════════════════════════════════ -->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:728px; height:90px; overflow:hidden; font-family:'Segoe UI',Arial,sans-serif; }
+
+  .ad {
+    width:728px; height:90px; overflow:hidden; cursor:pointer; position:relative;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 60%, #1a1a2e 100%);
+    display:flex; align-items:center;
+    border-top:3px solid #E63946;
+  }
+
+  /* Shimmer accent */
+  .ad::after {
+    content:''; position:absolute; top:3px; left:0; right:0; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(230,57,70,0.4),transparent);
+    animation: scan 2.5s linear infinite;
+  }
+  @keyframes scan { from{transform:translateX(-100%)} to{transform:translateX(100%)} }
+
+  /* Logo / brand */
+  .logo-section {
+    width:160px; padding:0 16px; flex-shrink:0;
+    border-right:1px solid rgba(255,255,255,0.1);
+    animation: fadeIn 0.4s ease;
+  }
+  .brand-name { color:white; font-size:14px; font-weight:800; line-height:1.2; }
+  .brand-sub  { color:#E63946; font-size:9px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; margin-top:2px; }
+
+  /* Headline */
+  .headline-section {
+    flex:1; padding:0 20px;
+    animation: fadeUp 0.5s 0.15s ease both;
+  }
+  .headline { color:white; font-size:18px; font-weight:800; white-space:nowrap; }
+  .headline span { color:#E63946; }
+  .tagline { color:#718096; font-size:10px; margin-top:2px; }
+
+  /* Pills */
+  .pills { display:flex; gap:5px; padding:0 10px; align-items:center; animation:fadeIn 0.5s 0.3s ease both; }
+  .pill {
+    background:rgba(230,57,70,0.12); border:1px solid rgba(230,57,70,0.35);
+    color:#ff6b7a; font-size:9px; font-weight:700; padding:3px 8px; border-radius:20px;
+    white-space:nowrap; text-transform:uppercase;
+  }
+
+  /* Contact */
+  .contact-section {
+    padding:0 14px; border-left:1px solid rgba(255,255,255,0.1); flex-shrink:0;
+    animation: fadeIn 0.5s 0.25s ease both;
+  }
+  .phone { color:white; font-size:13px; font-weight:700; white-space:nowrap; }
+  .email { color:#718096; font-size:9px; margin-top:2px; }
+
+  /* CTA */
+  .cta {
+    margin:0 14px; padding:0 16px; height:44px; flex-shrink:0;
+    background:linear-gradient(135deg,#25d366,#1da851);
+    border-radius:8px; display:flex; align-items:center; gap:6px; text-decoration:none;
+    animation: fadeIn 0.5s 0.4s ease both;
+    box-shadow:0 2px 12px rgba(37,211,102,0.3);
+  }
+  .cta svg { width:13px; height:13px; fill:white; flex-shrink:0; }
+  .cta-text { color:white; font-size:11px; font-weight:700; white-space:nowrap; }
+
+  .domain {
+    position:absolute; bottom:4px; right:6px;
+    color:#2d3748; font-size:8px; letter-spacing:0.5px;
+  }
+
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+<div class="ad" onclick="window.open('https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote','_blank')">
+
+  <div class="logo-section">
+    <div class="brand-name">Innovative<br>Kitchen</div>
+    <div class="brand-sub">UAE</div>
+  </div>
+
+  <div class="headline-section">
+    <div class="headline">Commercial Kitchen Equipment <span>UAE</span></div>
+    <div class="tagline">Dubai · Abu Dhabi · Sharjah · Ajman · RAK · Fujairah · All UAE</div>
+  </div>
+
+  <div class="pills">
+    <span class="pill">Supply</span>
+    <span class="pill">Install</span>
+    <span class="pill">AMC</span>
+  </div>
+
+  <div class="contact-section">
+    <div class="phone">📞 +971 56 724 0634</div>
+    <div class="email">salesexecutive.ae@outlook.com</div>
+  </div>
+
+  <a class="cta" href="https://wa.me/971567240634?text=Hi%2C%20I%27d%20like%20a%20kitchen%20equipment%20quote" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.124.554 4.118 1.524 5.847L.058 23.5l5.788-1.517A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+    <span class="cta-text">WhatsApp Quote</span>
+  </a>
+
+  <span class="domain">innovativekitchen.ae</span>
+</div>
+</body>
+</html>

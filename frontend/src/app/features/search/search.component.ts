@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../catalog/data-access/product.service';
 import { PaginatedProducts } from '../catalog/data-access/product.model';
 import { ProductCardComponent } from '../../shared/ui/product-card/product-card.component';
+import { SeoService } from '../../core/services/seo.service';
 
 @Component({
   selector: 'app-search',
@@ -40,6 +41,7 @@ import { ProductCardComponent } from '../../shared/ui/product-card/product-card.
 export class SearchComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly productService = inject(ProductService);
+  private readonly seo = inject(SeoService);
 
   readonly query = signal('');
   readonly result = signal<PaginatedProducts | null>(null);
@@ -48,6 +50,11 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(({ q }) => {
       this.query.set(q ?? '');
+      this.seo.set({
+        title: q ? `Search: "${q}" – Innovative Kitchen` : 'Search – Innovative Kitchen',
+        description: `Search results for commercial kitchen equipment in UAE.`,
+        noIndex: true,
+      });
       if (q) {
         this.loading.set(true);
         this.productService.search(q).subscribe({

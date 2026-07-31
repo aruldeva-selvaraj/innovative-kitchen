@@ -11,18 +11,24 @@ class SearchController extends Controller
 {
     public function search(Request $request)
     {
-        $q = $request->validate(['q' => 'required|string|min:2'])['q'];
+        // OWASP A03 — cap query length; enforce safe per_page ceiling
+        $validated = $request->validate([
+            'q'        => 'required|string|min:2|max:100',
+            'per_page' => 'sometimes|integer|min:1|max:48',
+        ]);
+
+        $q       = $validated['q'];
+        $perPage = (int) ($validated['per_page'] ?? 24);
 
         $products = Product::with(['category', 'brand'])
             ->active()
             ->where(function ($query) use ($q) {
                 $query->whereILike('name', "%{$q}%")
-                      ->orWhereILike('description', "%{$q}%")
                       ->orWhereILike('sku', "%{$q}%")
-                      ->orWhereHas('brand', fn($b) => $b->whereILike('name', "%{$q}%"))
-                      ->orWhereHas('category', fn($c) => $c->whereILike('name', "%{$q}%"));
+                      ->orWhereHas('brand', fn ($b) => $b->whereILike('name', "%{$q}%"))
+                      ->orWhereHas('category', fn ($c) => $c->whereILike('name', "%{$q}%"));
             })
-            ->paginate((int) $request->get('per_page', 24));
+            ->paginate($perPage);
 
         return ProductResource::collection($products);
     }
